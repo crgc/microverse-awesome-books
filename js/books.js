@@ -1,16 +1,20 @@
 let books = [];
 let addBook = (title, author) => {
+  const id = books.length + 1;
   books.push({
+    id: id,
     title: title,
     author: author
   });
+
   displayBooks();
 ;};
 
-let removeBook = (position) => {
-  books = books.filter((value, index, arr) => { 
-    return position == index;
+let removeBook = (bookId) => {
+  books = books.filter((book) => { 
+    return book.id != bookId;
   });
+
   displayBooks();
 };
 
@@ -20,7 +24,7 @@ let displayBooks = () => {
 
   const createDiv = () => { return document.createElement('div'); };
 
-  books.forEach((book) => {
+  books.forEach((book, index) => {
     const bookDiv = createDiv();
     bookDiv.className = 'book';
 
@@ -30,8 +34,19 @@ let displayBooks = () => {
     const authorDiv = createDiv();
     authorDiv.textContent = book.author;
 
+    const removeBtn = document.createElement('button');
+    removeBtn.className = ['removeBtn-', book.id].join('');
+    removeBtn.textContent = 'Remove'
+    removeBtn.addEventListener('click', (event) => {
+      const source = event.target;
+      const bookId = source.className.split('-')[1];
+
+      removeBook(bookId);
+    });
+
     bookDiv.appendChild(titleDiv);
     bookDiv.appendChild(authorDiv);
+    bookDiv.appendChild(removeBtn);
 
     booksDiv.appendChild(bookDiv);
   });
