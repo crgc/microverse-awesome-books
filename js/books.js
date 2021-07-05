@@ -1,5 +1,5 @@
 let books = [];
-let addBook = function(title, author) {
+let addBook = (title, author) => {
   books.push({
     title: title,
     author: author
@@ -7,25 +7,27 @@ let addBook = function(title, author) {
   displayBooks();
 ;};
 
-let removeBook = function(position) {
-  books = books.filter(function(value, index, arr){ 
+let removeBook = (position) => {
+  books = books.filter((value, index, arr) => { 
     return position == index;
   });
   displayBooks();
 };
 
-let displayBooks = function(){
-  const document = window.document;
+let displayBooks = () => {
   const booksDiv = document.querySelector('.books');
+  booksDiv.textContent = '';
 
-  books.forEach(function(book) {
-    const bookDiv = document.createElement('div');
+  const createDiv = () => { return document.createElement('div'); };
+
+  books.forEach((book) => {
+    const bookDiv = createDiv();
     bookDiv.className = 'book';
 
-    const titleDiv = document.createElement('div');
+    const titleDiv = createDiv();
     titleDiv.textContent = book.title;
 
-    const authorDiv = document.createElement('div');
+    const authorDiv = createDiv();
     authorDiv.textContent = book.author;
 
     bookDiv.appendChild(titleDiv);
