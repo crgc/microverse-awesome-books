@@ -20,13 +20,13 @@ let displayBooks = function(){
 
   books.forEach(function(book) {
     const bookDiv = document.createElement('div');
-    bookDiv.className = 'book'
+    bookDiv.className = 'book';
 
     const titleDiv = document.createElement('div');
-    titleDiv.textContent = book.title
+    titleDiv.textContent = book.title;
 
     const authorDiv = document.createElement('div');
-    authorDiv.textContent = book.author
+    authorDiv.textContent = book.author;
 
     bookDiv.appendChild(titleDiv);
     bookDiv.appendChild(authorDiv);
@@ -35,4 +35,9 @@ let displayBooks = function(){
   });
 };
 
-addBook('The Lord of the Rings', 'J. R. R. Tolkien');
+const addBtn = document.querySelector('#addBtn');
+addBtn.addEventListener('click', () => {
+  const inputTitle = document.querySelector('.inputTitle');
+  const inputAuthor = document.querySelector('.inputAuthor');
+  addBook(inputTitle.value, inputAuthor.value);
+});
