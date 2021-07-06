@@ -1,49 +1,52 @@
-function localStorageAvailable() {
-  let storage;
-
-  try {
-    storage = window.localStorage;
-    const x = '__storage_test__';
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  } catch (e) {
-    return e instanceof DOMException && (
-      // everything except Firefox
-      e.code === 22
-      // Firefox
-      || e.code === 1014
-      // test name field too, because code might not be present
-      // everything except Firefox
-      || e.name === 'QuotaExceededError'
-      // Firefox
-      || e.name === 'NS_ERROR_DOM_QUOTA_REACHED')
-      // acknowledge QuotaExceededError only if there's something already stored
-      && (storage && storage.length !== 0);
+class StorageUtil {
+  constructor() {}
+  localStorageAvailable() {
+    let storage;
+  
+    try {
+      storage = window.localStorage;
+      const x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return e instanceof DOMException && (
+        // everything except Firefox
+        e.code === 22
+        // Firefox
+        || e.code === 1014
+        // test name field too, because code might not be present
+        // everything except Firefox
+        || e.name === 'QuotaExceededError'
+        // Firefox
+        || e.name === 'NS_ERROR_DOM_QUOTA_REACHED')
+        // acknowledge QuotaExceededError only if there's something already stored
+        && (storage && storage.length !== 0);
+    }
+  }
+  setItem(name, item) {
+    if (this.localStorageAvailable()) {
+      localStorage.setItem(name, item);
+    }
+  }
+  getItem(name) {
+    if (this.localStorageAvailable()) {
+      return localStorage.getItem(name);
+    }
+  
+    return null;
   }
 }
 
-function setItem(name, item) {
-  if (localStorageAvailable()) {
-    localStorage.setItem(name, item);
-  }
-}
-
-function getItem(name) {
-  if (localStorageAvailable()) {
-    return localStorage.getItem(name);
-  }
-
-  return null;
-}
+const storageUtil = new StorageUtil();
 
 /* eslint-disable no-use-before-define */
 function saveBooks() {
-  setItem('books', JSON.stringify(books));
+  storageUtil.setItem('books', JSON.stringify(books));
 }
 
 function getBooks() {
-  return JSON.parse(getItem('books'));
+  return JSON.parse(storageUtil.getItem('books'));
 }
 
 function displayBooks() {
