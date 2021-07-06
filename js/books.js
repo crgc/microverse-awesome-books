@@ -97,7 +97,7 @@ function addBook(title, author) {
 }
 
 function removeBook(bookId) {
-  books = books.filter((book) => book.id !== bookId);
+  books = books.filter((book) => book.id != bookId); /* eslint-disable-line eqeqeq */
   saveAndDisplay();
 }
 /* eslint-enable no-use-before-define */
