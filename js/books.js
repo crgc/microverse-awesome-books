@@ -33,8 +33,11 @@ function getItem(name) {
   if (localStorageAvailable()) {
     return localStorage.getItem(name);
   }
+
+  return null;
 }
 
+/* eslint-disable no-use-before-define */
 function saveBooks() {
   setItem('books', JSON.stringify(books));
 }
@@ -94,9 +97,10 @@ function addBook(title, author) {
 }
 
 function removeBook(bookId) {
-  books = books.filter((book) => book.id != bookId);
+  books = books.filter((book) => book.id !== bookId);
   saveAndDisplay();
 }
+/* eslint-enable no-use-before-define */
 
 const addBtn = document.querySelector('#addBtn');
 addBtn.addEventListener('click', () => {
