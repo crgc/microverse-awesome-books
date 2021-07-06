@@ -1,6 +1,8 @@
 function localStorageAvailable() {
+  let storage;
+
   try {
-    const storage = window.localStorage;
+    storage = window.localStorage;
     const x = '__storage_test__';
     storage.setItem(x, x);
     storage.removeItem(x);
@@ -33,36 +35,12 @@ function getItem(name) {
   }
 }
 
-let books = getBooks() || [];
-if (books) {
-  displayBooks();
-}
-
 function saveBooks() {
   setItem('books', JSON.stringify(books));
 }
 
 function getBooks() {
   return JSON.parse(getItem('books'));
-}
-
-function addBook(title, author) {
-  const id = books.length + 1;
-  books.push({
-    id,
-    title,
-    author,
-  });
-
-  saveBooks();
-  displayBooks();
-}
-
-function removeBook(bookId) {
-  books = books.filter((book) => book.id != bookId);
-
-  saveBooks();
-  displayBooks();
 }
 
 function displayBooks() {
@@ -99,9 +77,36 @@ function displayBooks() {
   });
 }
 
+function saveAndDisplay() {
+  saveBooks();
+  displayBooks();
+}
+
+function addBook(title, author) {
+  const id = books.length + 1;
+  books.push({
+    id,
+    title,
+    author,
+  });
+
+  saveAndDisplay();
+}
+
+function removeBook(bookId) {
+  books = books.filter((book) => book.id != bookId);
+  saveAndDisplay();
+}
+
 const addBtn = document.querySelector('#addBtn');
 addBtn.addEventListener('click', () => {
   const inputTitle = document.querySelector('.inputTitle');
   const inputAuthor = document.querySelector('.inputAuthor');
+
   addBook(inputTitle.value, inputAuthor.value);
 });
+
+let books = getBooks() || [];
+if (books.length > 0) {
+  displayBooks();
+}
