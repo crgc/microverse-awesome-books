@@ -2,7 +2,6 @@ class StorageUtil {
   constructor() {}
   localStorageAvailable() {
     let storage;
-  
     try {
       storage = window.localStorage;
       const x = '__storage_test__';
@@ -33,7 +32,6 @@ class StorageUtil {
     if (this.localStorageAvailable()) {
       return localStorage.getItem(name);
     }
-  
     return null;
   }
 }
@@ -61,64 +59,71 @@ class Library {
   addBook(title, author) {
     const id = this.books.length + 1;
     const book = new Book(id, title, author);
-
     this.books.push(book);
     this.save();
-    displayBooks();
   }
   removeBook(bookId) {
     this.books = this.books.filter((book) => book.id != bookId); /* eslint-disable-line eqeqeq */
     this.save();
-    displayBooks();
   }
 }
 
-const library = new Library();
-if(library.books.length > 0) {
-  displayBooks();
+class Display {
+  constructor(library) {
+    this.library = library;
+  }
+  setRemoveButtonListener(removeButtonListener) {
+    this.removeButtonListener = removeButtonListener;
+  }
+  render() {
+    const booksDiv = document.querySelector('.books');
+    booksDiv.textContent = '';
+    const createDiv = () => document.createElement('div');
+    const books = this.library.books;
+    books.forEach((book) => {
+      const bookDiv = createDiv();
+      bookDiv.className = 'book';
+      const titleDiv = createDiv();
+      titleDiv.textContent = book.title;
+      const authorDiv = createDiv();
+      authorDiv.textContent = book.author;
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = 'Remove';
+      removeBtn.className = ['removeBtn-', book.id].join('');
+      removeBtn.addEventListener('click', this.removeButtonListener);
+      bookDiv.appendChild(titleDiv);
+      bookDiv.appendChild(authorDiv);
+      bookDiv.appendChild(removeBtn);
+      booksDiv.appendChild(bookDiv);
+    });
+  }
 }
 
-/* eslint-disable no-use-before-define */
-function displayBooks() {
-  const booksDiv = document.querySelector('.books');
-  booksDiv.textContent = '';
-
-  const createDiv = () => document.createElement('div');
-  const books = library.books;
-
-  books.forEach((book) => {
-    const bookDiv = createDiv();
-    bookDiv.className = 'book';
-
-    const titleDiv = createDiv();
-    titleDiv.textContent = book.title;
-
-    const authorDiv = createDiv();
-    authorDiv.textContent = book.author;
-
-    const removeBtn = document.createElement('button');
-    removeBtn.className = ['removeBtn-', book.id].join('');
-    removeBtn.textContent = 'Remove';
-    removeBtn.addEventListener('click', (event) => {
+class App {
+  constructor() {
+    this.library = new Library();
+    this.display = new Display(this.library);
+  }
+  start() {
+    const addBtn = document.querySelector('#addBtn');
+    const thislibrary = this.library;
+    const thisdisplay = this.display;
+    addBtn.addEventListener('click', () => {
+      const inputTitle = document.querySelector('.inputTitle');
+      const inputAuthor = document.querySelector('.inputAuthor');
+      thislibrary.addBook(inputTitle.value, inputAuthor.value);
+      thisdisplay.render();
+    });
+    const removeButtonListener = () => {
       const source = event.target;
       const bookId = source.className.split('-')[1];
-
-      library.removeBook(bookId);
-    });
-
-    bookDiv.appendChild(titleDiv);
-    bookDiv.appendChild(authorDiv);
-    bookDiv.appendChild(removeBtn);
-
-    booksDiv.appendChild(bookDiv);
-  });
+      thislibrary.removeBook(bookId);
+      thisdisplay.render();
+    };
+    this.display.setRemoveButtonListener(removeButtonListener);
+    this.display.render();
+  }
 }
-/* eslint-enable no-use-before-define */
 
-const addBtn = document.querySelector('#addBtn');
-addBtn.addEventListener('click', () => {
-  const inputTitle = document.querySelector('.inputTitle');
-  const inputAuthor = document.querySelector('.inputAuthor');
-
-  library.addBook(inputTitle.value, inputAuthor.value);
-});
+const app = new App();
+app.start();
