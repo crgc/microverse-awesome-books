@@ -38,6 +38,14 @@ class StorageUtil {
   }
 }
 
+class Book {
+  constructor(id, title, author) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+  }
+}
+
 const storageUtil = new StorageUtil();
 
 /* eslint-disable no-use-before-define */
@@ -90,11 +98,8 @@ function saveAndDisplay() {
 
 function addBook(title, author) {
   const id = books.length + 1;
-  books.push({
-    id,
-    title,
-    author,
-  });
+  const book = new Book(id, title, author);
+  books.push(book);
 
   saveAndDisplay();
 }
