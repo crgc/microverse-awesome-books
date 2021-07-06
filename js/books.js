@@ -46,22 +46,45 @@ class Book {
   }
 }
 
-const storageUtil = new StorageUtil();
+class Library {
+  constructor() {
+    this.books = [];
+    this.storageUtil = new StorageUtil();
+    this.init();
+  }
+  init() {
+    this.books = JSON.parse(this.storageUtil.getItem('books')) || [];
+  }
+  save() {
+    this.storageUtil.setItem('books', JSON.stringify(this.books));
+  }
+  addBook(title, author) {
+    const id = this.books.length + 1;
+    const book = new Book(id, title, author);
+
+    this.books.push(book);
+    this.save();
+    displayBooks();
+  }
+  removeBook(bookId) {
+    this.books = this.books.filter((book) => book.id != bookId); /* eslint-disable-line eqeqeq */
+    this.save();
+    displayBooks();
+  }
+}
+
+const library = new Library();
+if(library.books.length > 0) {
+  displayBooks();
+}
 
 /* eslint-disable no-use-before-define */
-function saveBooks() {
-  storageUtil.setItem('books', JSON.stringify(books));
-}
-
-function getBooks() {
-  return JSON.parse(storageUtil.getItem('books'));
-}
-
 function displayBooks() {
   const booksDiv = document.querySelector('.books');
   booksDiv.textContent = '';
 
   const createDiv = () => document.createElement('div');
+  const books = library.books;
 
   books.forEach((book) => {
     const bookDiv = createDiv();
@@ -80,7 +103,7 @@ function displayBooks() {
       const source = event.target;
       const bookId = source.className.split('-')[1];
 
-      removeBook(bookId);
+      library.removeBook(bookId);
     });
 
     bookDiv.appendChild(titleDiv);
@@ -90,24 +113,6 @@ function displayBooks() {
     booksDiv.appendChild(bookDiv);
   });
 }
-
-function saveAndDisplay() {
-  saveBooks();
-  displayBooks();
-}
-
-function addBook(title, author) {
-  const id = books.length + 1;
-  const book = new Book(id, title, author);
-  books.push(book);
-
-  saveAndDisplay();
-}
-
-function removeBook(bookId) {
-  books = books.filter((book) => book.id != bookId); /* eslint-disable-line eqeqeq */
-  saveAndDisplay();
-}
 /* eslint-enable no-use-before-define */
 
 const addBtn = document.querySelector('#addBtn');
@@ -115,10 +120,5 @@ addBtn.addEventListener('click', () => {
   const inputTitle = document.querySelector('.inputTitle');
   const inputAuthor = document.querySelector('.inputAuthor');
 
-  addBook(inputTitle.value, inputAuthor.value);
+  library.addBook(inputTitle.value, inputAuthor.value);
 });
-
-let books = getBooks() || [];
-if (books.length > 0) {
-  displayBooks();
-}
