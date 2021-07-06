@@ -23,6 +23,8 @@ Working with Low Fidelity WireFrames
 ### Usage
   - Create a branch to make improvements in the project.
 
+## Live Demo
+[Awesome Books](https://crgc.github.io/microverse-awesome-books/)
 
 ## Authors
 
