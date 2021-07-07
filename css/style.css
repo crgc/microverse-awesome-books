@@ -1,3 +1,28 @@
+.bg-grey {
+  background-color: #dddddd;
+}
+
+main {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.books {
+  margin: 1rem;
+  border: 0.2rem solid black;
+  width: 40%;
+}
+
+.book-wrapper {
+  padding: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .book {
-  margin: 5px 0 5px 0;
+
 }
