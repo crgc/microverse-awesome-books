@@ -22,7 +22,7 @@ export default class App {
 
     const removeButtonListener = (event) => {
       const source = event.target;
-      const bookId = source.className.split('-')[1];
+      const bookId = source.className.split('-')[2];
 
       thislibrary.removeBook(bookId);
       thisdisplay.render();
