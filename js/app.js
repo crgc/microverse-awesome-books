@@ -8,13 +8,13 @@ export default class App {
   }
 
   start() {
-    const addBtn = document.querySelector('#addBtn');
+    const addBtn = document.getElementById('add-btn');
     const thislibrary = this.library;
     const thisdisplay = this.display;
 
     addBtn.addEventListener('click', () => {
-      const inputTitle = document.querySelector('.inputTitle');
-      const inputAuthor = document.querySelector('.inputAuthor');
+      const inputTitle = document.getElementsByClassName('input-title')[0];
+      const inputAuthor = document.getElementsByClassName('input-author')[0];
 
       thislibrary.addBook(inputTitle.value, inputAuthor.value);
       thisdisplay.render();
