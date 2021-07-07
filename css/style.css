@@ -14,7 +14,7 @@ main {
 .books {
   margin: 1rem;
   border: 0.2rem solid black;
-  width: 40%;
+  width: 50%;
 }
 
 .book-wrapper {
@@ -23,6 +23,25 @@ main {
   justify-content: space-between;
 }
 
-.book {
+.gray-line {
+  border: 1px solid #9c9c9c;
+  width: 8rem;
+}
 
+.add-book-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-title {
+  margin-bottom: 0.5rem;
+}
+
+.input-author {
+  margin-bottom: 0.5rem;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: flex-end;
 }
