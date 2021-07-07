@@ -34,6 +34,11 @@ export default class Display {
       bookDiv.appendChild(removeBtn);
 
       booksDiv.appendChild(bookDiv);
+
+      (() => {
+        document.querySelector('.inputTitle').value = '';
+        document.querySelector('.inputAuthor').value = '';
+      })();
     });
   }
 }
