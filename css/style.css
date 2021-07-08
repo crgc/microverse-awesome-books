@@ -10,6 +10,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+p {
+  margin: 0;
+}
+
 a,
 a:visited {
   color: inherit;
@@ -62,17 +66,17 @@ footer {
 
 nav,
 main,
-.book-wrapper,
-.add-new,
 .add-btn,
-.list,
-.contact {
+.book-wrapper,
+#add-new,
+#list,
+#contact {
   display: flex;
 }
 
 main,
-.list,
-.contact {
+#list,
+#contact {
   align-items: center;
   flex-direction: column;
 }
@@ -82,7 +86,7 @@ main {
   margin: 2% auto 2% auto;
 }
 
-.list {
+#list {
   width: 100%;
 }
 
@@ -95,17 +99,25 @@ main {
   padding: 10px 15px;
 }
 
-.add-new {
+#add-new {
+  width: 30%;
+  text-align: center;
   flex-direction: column;
 }
 
 .input-title,
 .input-author {
-  margin-bottom: 0.5rem;
+  height: 1rem;
+  margin-bottom: 0.7rem;
 }
 
 .add-btn {
   justify-content: flex-end;
+}
+
+.add-btn button {
+  width: 15%;
+  height: 1.5rem;
 }
 
 footer {

@@ -25,12 +25,12 @@
    <div id="date"></div>
 
    <main class="main">
-      <section class="list">
+      <section id="list">
          <h1>All awesome books</h1>
          <div class="books"></div>
       </section>
 
-      <section class="add-new hidden">
+      <section id="add-new" class="hidden">
          <h2>Add a new book</h2>
          <input class="input-title" type="text" placeholder="Title">
          <input class="input-author" type="text" placeholder="Author">
@@ -39,11 +39,13 @@
          </div>
       </section>
 
-      <section class="contact hidden">
+      <section id="contact" class="hidden">
          <h2>Contact Information</h2>
-         <pre>Do you have any question or just want to say "Hello"?
-        You can reach out to us!
-            </pre>
+         <div class="contact-message">
+            <p>Do you have any question or just want to say "Hello"?
+            </p>
+            <p>You can reach out to us!</p>
+         </div>
          <ul>
             <li>Our e-email mail@mail.com</li>
             <li>Our phone number. 0043586534422</li>
