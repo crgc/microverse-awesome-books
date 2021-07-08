@@ -8,8 +8,9 @@ body {
 
 main,
 .book-wrapper,
-.add-book-container,
-.add-btn {
+.add-new,
+.add-btn,
+.list {
   display: flex;
 }
 
@@ -23,7 +24,7 @@ main {
 .books {
   margin: 1rem;
   border: 0.2rem solid black;
-  width: 50%;
+  width: 100%;
 }
 
 .book-wrapper {
@@ -31,13 +32,8 @@ main {
   justify-content: space-between;
 }
 
-.gray-line {
-  border: 1px solid #9c9c9c;
-  width: 8rem;
-}
-
 main,
-.add-book-container {
+.add-new {
   flex-direction: column;
 }
 
@@ -48,4 +44,9 @@ main,
 
 .add-btn {
   justify-content: flex-end;
+}
+
+.list {
+  flex-direction: column;
+  align-items: center;
 }
