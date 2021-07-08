@@ -12,12 +12,14 @@
 
 <body>
    <nav>
-      <ul>
-         <li class="logo">Awesome Books</li>
-         <li>List</li>
-         <li>Add new</li>
-         <li>Contact</li>
-      </ul>
+      <div class="nav-left">Awesome Books</div>
+      <div class="nav-right">
+         <ul>
+            <li>List</li>
+            <li>Add new</li>
+            <li>Contact</li>
+         </ul>
+      </div>
    </nav>
 
    <div id="date"></div>
@@ -28,7 +30,7 @@
          <div class="books"></div>
       </section>
 
-      <section class="add-new">
+      <section class="add-new hidden">
          <h2>Add a new book</h2>
          <input class="input-title" type="text" placeholder="Title">
          <input class="input-author" type="text" placeholder="Author">
@@ -37,7 +39,7 @@
          </div>
       </section>
 
-      <section class="contact">
+      <section class="contact hidden">
          <h2>Contact Information</h2>
          <pre>Do you have any question or just want to say "Hello"?
         You can reach out to us!
@@ -51,9 +53,10 @@
    </main>
 
    <footer>
-      Copyright ...
+      <div class="copyright">Copyright ...</div>
    </footer>
-   <script type="module" src="js/main.js"></script>
+   <!-- <script type="module" src="js/main.js"></script> -->
+   <script src="js/_main_.js"></script>
 </body>
 
 </html>
