@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Awesome Books</title>
 
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Awesome Books</title>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="shortcut icon" href="img/book.ico" type="image/x-icon">
+   </head>
+   <body>
+      <main class="main">
+         <h1>All awesome books</h1>
+         <div class="books"></div>
 
-   <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-   <main class="main">
-      <h1>Awesome Books</h1>
-      <div class="books"></div>
-
-      <input class="inputTitle" type="text" placeholder="Title">
-      <input class="inputAuthor" type="text" placeholder="Author">
-      <button id="addBtn" type="button">Add</button>
-   </main>
-
-   <script type="module" src="js/main.js"></script>
-</body>
-
+         <div class="gray-line"></div>
+         
+         <div class="add-book-container">
+         <h2>Add a new book</h2>
+         <input class="input-title" type="text" placeholder="Title">
+         <input class="input-author" type="text" placeholder="Author">
+         <div class="add-btn">
+            <button id="add-btn" type="button">Add</button>
+         </div>
+         </div>
+      </main>
+      <script type="module" src="js/main.js"></script>
+   </body>
 </html>

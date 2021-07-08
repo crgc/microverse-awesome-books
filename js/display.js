@@ -14,30 +14,29 @@ export default class Display {
     const createDiv = () => document.createElement('div');
     const { books } = this.library;
 
-    books.forEach((book) => {
+    books.forEach((book, index) => {
+      const isEven = (n) => n % 2 === 0;
+
+      const bookWrapperDiv = createDiv();
+      bookWrapperDiv.className = isEven(index) ? 'book-wrapper bg-grey' : 'book-wrapper';
+
       const bookDiv = createDiv();
       bookDiv.className = 'book';
-
-      const titleDiv = createDiv();
-      titleDiv.textContent = book.title;
-
-      const authorDiv = createDiv();
-      authorDiv.textContent = book.author;
+      bookDiv.textContent = `"${book.title}" by ${book.author}`;
 
       const removeBtn = document.createElement('button');
       removeBtn.addEventListener('click', this.removeButtonListener);
-      removeBtn.className = ['removeBtn-', book.id].join('');
+      removeBtn.className = `remove-btn-${book.id}`;
       removeBtn.textContent = 'Remove';
 
-      bookDiv.appendChild(titleDiv);
-      bookDiv.appendChild(authorDiv);
-      bookDiv.appendChild(removeBtn);
+      bookWrapperDiv.appendChild(bookDiv);
+      bookWrapperDiv.appendChild(removeBtn);
 
-      booksDiv.appendChild(bookDiv);
+      booksDiv.appendChild(bookWrapperDiv);
 
       (() => {
-        document.querySelector('.inputTitle').value = '';
-        document.querySelector('.inputAuthor').value = '';
+        document.getElementsByClassName('input-title')[0].value = '';
+        document.getElementsByClassName('input-author')[0].value = '';
       })();
     });
   }

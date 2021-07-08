@@ -1,3 +1,51 @@
-.book {
-  margin: 5px 0 5px 0;
+.bg-grey {
+  background-color: #ddd;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main,
+.book-wrapper,
+.add-book-container,
+.add-btn {
+  display: flex;
+}
+
+main {
+  width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.books {
+  margin: 1rem;
+  border: 0.2rem solid black;
+  width: 50%;
+}
+
+.book-wrapper {
+  padding: 10px 5px;
+  justify-content: space-between;
+}
+
+.gray-line {
+  border: 1px solid #9c9c9c;
+  width: 8rem;
+}
+
+main,
+.add-book-container {
+  flex-direction: column;
+}
+
+.input-title,
+.input-author {
+  margin-bottom: 0.5rem;
+}
+
+.add-btn {
+  justify-content: flex-end;
 }
