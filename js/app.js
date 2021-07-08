@@ -1,7 +1,6 @@
 import Library from './library.js';
 import Display from './display.js';
 import Navigation from './navigation.js';
-import DateTime from 'luxon';
 
 export default class App {
   constructor() {
@@ -30,7 +29,7 @@ export default class App {
       }
     };
 
-    const dateTime = DateTime.now();
+    const dateTime = luxon.DateTime.now(); /* eslint-disable-line no-undef */
     const { day } = dateTime;
     const daySuffix = numberSuffix(day);
 
