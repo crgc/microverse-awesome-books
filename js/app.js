@@ -1,13 +1,47 @@
 import Library from './library.js';
 import Display from './display.js';
+import Navigation from './navigation.js';
 
 export default class App {
   constructor() {
     this.library = new Library();
+    this.navigation = new Navigation();
     this.display = new Display(this.library);
   }
 
-  start() {
+  setDateTime() {
+    const numberSuffix = (num) => {
+      const th = 'th'
+      const rd = 'rd'
+      const nd = 'nd'
+      const st = 'st'
+    
+      if (num === 11 || num === 12 || num === 13) return th
+    
+      let lastDigit = num.toString().slice(-1)
+    
+      switch (lastDigit) {
+        case '1': return st
+        case '2': return nd
+        case '3': return rd
+        default:  return th
+      }
+    };
+
+    const dateTimeElement = document.getElementById('datetime');
+    const dateTime = luxon.DateTime.now();
+
+    const day = dateTime.day;
+    const daySuffix = numberSuffix(day);
+
+    const month = dateTime.toFormat('MMMM');
+    const year = dateTime.toFormat('yyyy');
+    const time = dateTime.toFormat('tt').toLowerCase();
+
+    dateTimeElement.textContent = `${month} ${day}${daySuffix} ${year} ${time}`;
+  }
+
+  renderDisplay() {
     const addBtn = document.getElementById('add-btn');
     const thislibrary = this.library;
     const thisdisplay = this.display;
@@ -30,5 +64,15 @@ export default class App {
 
     this.display.setRemoveButtonListener(removeButtonListener);
     this.display.render();
+  }
+
+  startNavigation() {
+    this.navigation.start();
+  }
+
+  start() {
+    this.setDateTime();
+    this.renderDisplay();
+    this.startNavigation();
   }
 }
