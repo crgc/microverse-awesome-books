@@ -15,11 +15,11 @@ export default class Navigation {
   setEventListeners() {
     const eventListener = (event) => {
       const clickedSectionId = event.target.id.substring('a-'.length);
-      
+
       const lastSelectedSection = this.lastSelectedSection();
       const clickedSection = this.getSection(clickedSectionId);
 
-      if(lastSelectedSection.id != clickedSection.id) {
+      if (lastSelectedSection.id != clickedSection.id) { /* eslint-disable-line eqeqeq */
         lastSelectedSection.hide();
         clickedSection.select();
       }
@@ -39,11 +39,11 @@ export default class Navigation {
   }
 
   getSection(id) {
-    switch(id) {
-      case 'list': return this.listSection
-      case 'add-new': return this.addNewSection
-      case 'contact': return this.contactSection
-      default: return this.listSection
+    switch (id) {
+      case 'list': return this.listSection;
+      case 'add-new': return this.addNewSection;
+      case 'contact': return this.contactSection;
+      default: return this.listSection;
     }
   }
 
