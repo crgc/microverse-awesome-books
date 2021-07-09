@@ -143,3 +143,6 @@ sftp-config.json
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
 .vscode/
+
+### _main.js_ file for dev purposes ###
+js/_main_.js

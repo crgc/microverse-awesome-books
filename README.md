@@ -4,7 +4,7 @@
 
 > Manage books collection
 
-![screenshot](./ScreenShots/awesome-books.png)
+![screenshot](./screenshots/awesome-books.png)
 
 Working with Low Fidelity WireFrames
 
